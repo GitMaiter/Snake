@@ -12,7 +12,6 @@ namespace Snake
         {
             Console.ForegroundColor = ConsoleColor.Green;   // Welcome to Matrix 
 
-
             Point point = new Point(10, 10, '*');
             point.Draw();
 
@@ -21,6 +20,9 @@ namespace Snake
 
             HorizontalLine liine = new HorizontalLine(5, 20, 8, '+');
             liine.Drow();
+
+            VerticalLine line1 = new VerticalLine(0, 8, 20, '+');
+            line1.Drow();
 
             Console.ReadKey();
         }
