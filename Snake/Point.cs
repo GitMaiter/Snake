@@ -8,20 +8,48 @@ namespace Snake
 {
     class Point
     {
-        public int x;
-        public int y;
-        public char sym;
+        public int xPos;
+        public int yPos;
+        public char symbol;
 
-        public Point(int x, int y, char sym)
+        public Point(int xPos, int yPos, char symbol)
         {
-            this.x = x;
-            this.y = y;
-            this.sym = sym;
+            this.xPos = xPos;
+            this.yPos = yPos;
+            this.symbol = symbol;
         }
-        public void Draw()
+
+        public Point(Point point)
         {
-            Console.SetCursorPosition(x, y);
-            Console.Write(sym);
+            this.xPos = point.xPos;
+            this.yPos = point.yPos;
+            this.symbol = point.symbol;
+        }
+
+        public void ChangeDirection(int offset, Direction direction)
+        {
+            if (direction == Direction.RIGHT)
+                xPos = xPos + offset;
+
+            if (direction == Direction.LEFT)
+                xPos = xPos - offset;
+
+            if (direction == Direction.UP)
+                yPos = yPos - offset;
+
+            if (direction == Direction.DOWN)
+                yPos = yPos + offset;
+        }
+        public void DrawPoint()
+        {
+            Console.SetCursorPosition(xPos, yPos);
+            Console.Write(symbol);
+        }
+
+        public void ClearPoint()
+        {
+            symbol = ' ';
+            DrawPoint();
         }
     }
 }
