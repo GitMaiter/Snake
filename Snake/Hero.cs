@@ -56,5 +56,25 @@ namespace Snake
             if (key == ConsoleKey.UpArrow)
                 direction = Direction.UP;
         }
+
+        public bool Eat(Point foodPoint)
+        {
+           Point headPoint = GetNextPoint();
+            if (headPoint.IsHit(foodPoint))
+            {
+                foodPoint.symbol = headPoint.symbol;
+                pointList.Add(foodPoint);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        internal bool IsHitTail()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

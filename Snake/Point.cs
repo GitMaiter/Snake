@@ -41,7 +41,7 @@ namespace Snake
                 yPos = yPos + offset;
         }
         public void DrawPoint()
-        {
+        {       
             Console.SetCursorPosition(xPos, yPos);
             Console.Write(symbol);
         }
@@ -50,6 +50,11 @@ namespace Snake
         {
             symbol = ' ';
             DrawPoint();
+        }
+
+        public bool IsHit(Point point)
+        {
+            return point.xPos == this.xPos && point.yPos == this.yPos;
         }
     }
 }

@@ -19,27 +19,31 @@ namespace Snake
             Hero snake = new Hero(point, 4, Direction.RIGHT); // point = start dir. position and snake symbol, 4 = default snake lenght, default direction
             snake.DrawFigure();
 
-            HorizontalLine downHorizontalLine = new HorizontalLine(0, 119, 25, '+'); // Down horizontal line (xLeft,  xRight,  y,  symbol)
-            downHorizontalLine.DrawFigure();
-            HorizontalLine upHorizontalLine = new HorizontalLine(0, 119, 0, '+'); // Up horizontal line (xLeft,  xRight,  y,  symbol)
-            upHorizontalLine.DrawFigure();
+            FoodCreator foodCreator = new FoodCreator(100, 25, '#'); // Max range of food spawn and default food symbol
+            Point foodPoint = foodCreator.CreateFood();
+            foodPoint.DrawPoint();
 
-            VerticalLine leftVerticalLine = new VerticalLine(0, 25, 0, '+');  // Left vertical line (yUp,  yDown,  x,  symbol)
-            leftVerticalLine.DrawFigure();
-            VerticalLine rightVerticalLine = new VerticalLine(0, 25, 119, '+'); // Right vertical line (yUp,  yDown,  x,  symbol)
-            rightVerticalLine.DrawFigure();
-
+            Walls walls = new Walls(120, 25); // Max x and y position of walls
+            walls.DrawWalls();
 
             while (true)
             {
+
+                if (snake.Eat(foodPoint))
+                {
+                    foodPoint = foodCreator.CreateFood();
+                    foodPoint.DrawPoint();
+                } else
+                {
+                    snake.MoveHero();
+                }
+                Thread.Sleep(300);
+
                 if (Console.KeyAvailable)
                 {
                     ConsoleKeyInfo key = Console.ReadKey();
                     snake.ChangeDirectionKey(key.Key);
                 }
-
-                Thread.Sleep(300);
-                snake.MoveHero();
 
             }
 
